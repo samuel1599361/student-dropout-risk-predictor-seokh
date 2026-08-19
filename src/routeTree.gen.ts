@@ -16,6 +16,7 @@ import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as AuthenticatedBulkRouteImport } from './routes/_authenticated/bulk'
 import { Route as AuthenticatedInsightsRouteImport } from './routes/_authenticated/insights'
 import { Route as AuthenticatedPredictRouteImport } from './routes/_authenticated/predict'
+import { Route as AuthenticatedStudentsRouteImport } from './routes/_authenticated/students'
 import { Route as AuthenticatedTemplateRouteImport } from './routes/_authenticated/template'
 
 const IndexRoute = IndexRouteImport.update({
@@ -52,6 +53,11 @@ const AuthenticatedPredictRoute = AuthenticatedPredictRouteImport.update({
   path: '/predict',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedStudentsRoute = AuthenticatedStudentsRouteImport.update({
+  id: '/students',
+  path: '/students',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedTemplateRoute = AuthenticatedTemplateRouteImport.update({
   id: '/template',
   path: '/template',
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/bulk': typeof AuthenticatedBulkRoute
   '/insights': typeof AuthenticatedInsightsRoute
   '/predict': typeof AuthenticatedPredictRoute
+  '/students': typeof AuthenticatedStudentsRoute
   '/template': typeof AuthenticatedTemplateRoute
 }
 export interface FileRoutesByTo {
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/bulk': typeof AuthenticatedBulkRoute
   '/insights': typeof AuthenticatedInsightsRoute
   '/predict': typeof AuthenticatedPredictRoute
+  '/students': typeof AuthenticatedStudentsRoute
   '/template': typeof AuthenticatedTemplateRoute
 }
 export interface FileRoutesById {
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/_authenticated/bulk': typeof AuthenticatedBulkRoute
   '/_authenticated/insights': typeof AuthenticatedInsightsRoute
   '/_authenticated/predict': typeof AuthenticatedPredictRoute
+  '/_authenticated/students': typeof AuthenticatedStudentsRoute
   '/_authenticated/template': typeof AuthenticatedTemplateRoute
 }
 export interface FileRouteTypes {
@@ -96,6 +105,7 @@ export interface FileRouteTypes {
     | '/bulk'
     | '/insights'
     | '/predict'
+    | '/students'
     | '/template'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -105,6 +115,7 @@ export interface FileRouteTypes {
     | '/bulk'
     | '/insights'
     | '/predict'
+    | '/students'
     | '/template'
   id:
     | '__root__'
@@ -115,6 +126,7 @@ export interface FileRouteTypes {
     | '/_authenticated/bulk'
     | '/_authenticated/insights'
     | '/_authenticated/predict'
+    | '/_authenticated/students'
     | '/_authenticated/template'
   fileRoutesById: FileRoutesById
 }
@@ -176,6 +188,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPredictRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/students': {
+      id: '/_authenticated/students'
+      path: '/students'
+      fullPath: '/students'
+      preLoaderRoute: typeof AuthenticatedStudentsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/template': {
       id: '/_authenticated/template'
       path: '/template'
@@ -190,6 +209,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedBulkRoute: typeof AuthenticatedBulkRoute
   AuthenticatedInsightsRoute: typeof AuthenticatedInsightsRoute
   AuthenticatedPredictRoute: typeof AuthenticatedPredictRoute
+  AuthenticatedStudentsRoute: typeof AuthenticatedStudentsRoute
   AuthenticatedTemplateRoute: typeof AuthenticatedTemplateRoute
 }
 
@@ -197,6 +217,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedBulkRoute: AuthenticatedBulkRoute,
   AuthenticatedInsightsRoute: AuthenticatedInsightsRoute,
   AuthenticatedPredictRoute: AuthenticatedPredictRoute,
+  AuthenticatedStudentsRoute: AuthenticatedStudentsRoute,
   AuthenticatedTemplateRoute: AuthenticatedTemplateRoute,
 }
 
