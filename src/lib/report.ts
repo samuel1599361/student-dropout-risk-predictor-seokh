@@ -256,7 +256,23 @@ export function downloadReport(
   template: ReportTemplate = loadTemplate(),
 ) {
   const doc = buildReport(student, result, preparedBy, template);
-  const blobUrl = doc.output("bloburl");
-  window.open(blobUrl, "_blank");
+  const fileName = `SEOK-dropout-risk-${student.student_id || "manual-entry"}.pdf`;
+  const blob = doc.output("blob");
+  const url = URL.createObjectURL(blob);
+
+  // Anchor download works in the editor preview iframe and on mobile browsers,
+  // where opening a blob: URL in a new tab is blocked and renders as 404.
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = fileName;
+  a.rel = "noopener";
+  a.target = "_self";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 60_000);
+
+  return fileName;
 }
+
 
