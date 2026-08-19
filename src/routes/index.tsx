@@ -178,7 +178,33 @@ function Landing() {
 
       <section className="border-y border-border/70 bg-secondary/50">
         <div className="mx-auto max-w-6xl px-4 py-16">
+          <h2 className="text-2xl font-bold">How it works for staff</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            SEOK is designed to fit a pastoral workflow: sign in, predict, review, and act. For a
+            full guide, click the help icon in the top-right corner once you are signed in.
+          </p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {HOW_IT_WORKS.map((step) => (
+              <Card key={step.title} className="border-border/70 bg-card shadow-soft">
+                <CardContent className="flex flex-col gap-3 p-5">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <step.icon className="size-5" />
+                  </span>
+                  <div>
+                    <h3 className="font-semibold text-foreground">{step.title}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">{step.body}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-border/70 bg-secondary/50">
+        <div className="mx-auto max-w-6xl px-4 py-16">
           <h2 className="text-2xl font-bold">The eight predictive features</h2>
+
           <p className="mt-2 text-sm text-muted-foreground">
             Used in this exact order by the model, alongside Student ID as identifier and
             Dropout as the target variable. Values outside the stated range are clamped to the
