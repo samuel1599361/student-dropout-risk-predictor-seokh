@@ -34,6 +34,9 @@ export function AppHeader() {
               <Button variant="ghost" size="sm" asChild>
                 <Link to="/insights">Insights</Link>
               </Button>
+              <Button variant="ghost" size="sm" asChild>
+                <Link to="/template">Template</Link>
+              </Button>
               <Button
                 variant="outline"
                 size="sm"

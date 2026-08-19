@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
 import { useAuth } from "@/hooks/useAuth";
-import { explain, predict, recommend } from "@/lib/model";
+import { predict } from "@/lib/model";
 import { buildReport, type StudentRecord } from "@/lib/report";
 import {
   DEFAULT_TEMPLATE,
@@ -94,10 +94,7 @@ function TemplateEditor() {
   const set = <K extends keyof ReportTemplate>(key: K, value: ReportTemplate[K]) =>
     setTemplate((prev) => ({ ...prev, [key]: value }));
 
-  const sampleResult = useMemo(() => {
-    const p = predict(SAMPLE);
-    return { ...p, drivers: explain(SAMPLE), recommendations: recommend(SAMPLE, explain(SAMPLE)) };
-  }, []);
+  const sampleResult = useMemo(() => predict(SAMPLE), []);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
