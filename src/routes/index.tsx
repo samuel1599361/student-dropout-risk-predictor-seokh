@@ -144,10 +144,10 @@ function Landing() {
               ))}
             </dl>
             <p className="mt-4 max-w-2xl text-xs text-ink-foreground/60">
-              Measured on a 1,000-record simulated database. Random Forest was selected because it
-              matched the top-scoring algorithms in a 10-model benchmark while adding out-of-bag
-              validation, noise robustness and native factor importance — not because it beat
-              them outright.
+              Measured on a 1,000-record simulated database, Random Forest was selected and
+              optimized because it matched the top-scoring algorithms in a 10 machine learning
+              model benchmark while adding out-of-bag validation, noise robustness, native factor
+              importance, and no strong evidence of overfitting.
             </p>
           </div>
         </div>
