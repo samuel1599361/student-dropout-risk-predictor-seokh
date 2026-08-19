@@ -80,7 +80,7 @@ function AuthPage() {
   const [fullName, setFullName] = useState("");
   const [school, setSchool] = useState("");
   const [busy, setBusy] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<{ email?: string; password?: string; fullName?: string; form?: string }>({});
   const [sentEmail, setSentEmail] = useState<null | "confirm" | "reset">(null);
 
   useEffect(() => {
@@ -96,7 +96,7 @@ function AuthPage() {
   };
 
   const validate = () => {
-    const next: Record<string, string> = {};
+    const next: { email?: string; password?: string; fullName?: string } = {};
     const e = emailSchema.safeParse(email);
     if (!e.success) next.email = e.error.issues[0]!.message;
     if (mode !== "forgot") {
