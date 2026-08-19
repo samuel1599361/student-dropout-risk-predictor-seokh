@@ -1,5 +1,7 @@
 import { jsPDF } from "jspdf";
+import { supabase } from "@/integrations/supabase/client";
 import { FEATURE_KEYS, FEATURE_META, MODEL_METRICS, type PredictionResult } from "./model";
+
 import {
   DEFAULT_TEMPLATE,
   hexToRgb,
