@@ -357,19 +357,138 @@ function TemplateEditor() {
               Sample report for {SAMPLE.student_id} using your current settings.
             </CardDescription>
           </CardHeader>
-          <CardContent>
-            {previewUrl ? (
-              <iframe
-                title="Report preview"
-                src={previewUrl}
-                className="h-[720px] w-full rounded-lg border border-border bg-muted"
-              />
-            ) : (
-              <div className="flex h-[720px] items-center justify-center rounded-lg border border-dashed border-border text-sm text-muted-foreground">
-                Building preview...
+          <CardContent className="space-y-4">
+            <div className="overflow-hidden rounded-lg border border-border bg-white shadow-sm">
+              <div
+                className="flex items-center gap-3 px-4 py-3"
+                style={{ backgroundColor: template.headerColor }}
+              >
+                {template.showLogo && template.logoDataUrl && (
+                  <img
+                    src={template.logoDataUrl}
+                    alt="Report logo"
+                    className="size-9 rounded bg-white/90 object-contain p-0.5"
+                  />
+                )}
+                <div className="min-w-0">
+                  <p className="truncate text-[13px] font-semibold text-white">{template.orgName}</p>
+                  <p className="truncate text-[11px] text-white/75">
+                    {template.reportTitle} — {template.subtitle}
+                  </p>
+                </div>
               </div>
-            )}
+              <div style={{ backgroundColor: template.accentColor, height: 3 }} />
+
+              <div className="space-y-4 p-4 text-[#1b2431]">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-wide text-[#6b7280]">Student</p>
+                    <p className="text-sm font-semibold">
+                      {SAMPLE.student_id} · Age {SAMPLE.age}
+                    </p>
+                  </div>
+                  <span
+                    className="rounded-md px-2.5 py-1 text-[11px] font-semibold text-white"
+                    style={{
+                      backgroundColor:
+                        sampleResult.label === 1 ? template.riskColor : template.safeColor,
+                    }}
+                  >
+                    {sampleResult.label === 1
+                      ? "✗ At Risk of Dropout (1)"
+                      : "Not At Risk of Dropout (0)"}
+                    {" · "}
+                    {(sampleResult.probability * 100).toFixed(1)}% ({sampleResult.band})
+                  </span>
+                </div>
+
+                <div>
+                  <p
+                    className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide"
+                    style={{ color: template.accentColor }}
+                  >
+                    Input features
+                  </p>
+                  <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-[11px]">
+                    {sampleResult.drivers.map((d) => (
+                      <div key={d.key} className="flex justify-between border-b border-dashed border-[#e5e7eb] py-0.5">
+                        <span className="truncate text-[#4b5563]">{d.label}</span>
+                        <span className="font-medium">
+                          {d.value} {d.unit}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide"
+                    style={{ color: template.accentColor }}
+                  >
+                    Why this verdict
+                  </p>
+                  <ul className="space-y-1 text-[11px] text-[#374151]">
+                    {sampleResult.drivers
+                      .slice(0, template.layout === "compact" ? 3 : 5)
+                      .map((d) => (
+                        <li key={d.key}>
+                          <span className="font-medium">
+                            {d.label} ({d.direction === "increases" ? "+" : "−"}
+                            {Math.abs(d.impact).toFixed(1)} pp)
+                          </span>{" "}
+                          — {d.reason}
+                        </li>
+                      ))}
+                  </ul>
+                </div>
+
+                <div>
+                  <p
+                    className="mb-1.5 text-[10px] font-semibold uppercase tracking-wide"
+                    style={{ color: template.accentColor }}
+                  >
+                    Recommended actions
+                  </p>
+                  <ol className="list-inside list-decimal space-y-1 text-[11px] text-[#374151]">
+                    {sampleResult.recommendations
+                      .slice(0, template.layout === "compact" ? 3 : 6)
+                      .map((r) => (
+                        <li key={r}>{r}</li>
+                      ))}
+                  </ol>
+                </div>
+
+                {template.layout === "detailed" && (
+                  <div className="rounded-md bg-[#f3f4f6] p-3 text-[10px] leading-relaxed text-[#4b5563]">
+                    <span className="font-semibold">Page 2 — Model card:</span> Optimized Random
+                    Forest classifier, 8 predictive features, 1,000-record simulated database,
+                    out-of-bag validation, decision-support only.
+                  </div>
+                )}
+              </div>
+
+              {template.showFooter && (
+                <div className="flex items-center justify-between gap-3 border-t border-[#e5e7eb] px-4 py-2 text-[9px] text-[#6b7280]">
+                  <span className="truncate">{template.footerText}</span>
+                  {template.showPageNumbers && (
+                    <span className="shrink-0">Page 1 of {template.layout === "detailed" ? 2 : 1}</span>
+                  )}
+                </div>
+              )}
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <Button variant="outline" size="sm" onClick={openPdfPreview}>
+                <FileText className="size-4" />
+                Download sample PDF
+              </Button>
+              <p className="text-xs text-muted-foreground">
+                {template.layout === "detailed" ? "2-page full report" : "1-page summary"}
+              </p>
+            </div>
           </CardContent>
+
         </Card>
       </div>
     </div>
