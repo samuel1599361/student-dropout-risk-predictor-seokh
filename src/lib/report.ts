@@ -256,5 +256,7 @@ export function downloadReport(
   template: ReportTemplate = loadTemplate(),
 ) {
   const doc = buildReport(student, result, preparedBy, template);
-  doc.save(`SEOK-dropout-risk-${student.student_id}.pdf`);
+  const blobUrl = doc.output("bloburl");
+  window.open(blobUrl, "_blank");
 }
+
