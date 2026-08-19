@@ -1,5 +1,12 @@
 import { jsPDF } from "jspdf";
 import { FEATURE_KEYS, FEATURE_META, MODEL_METRICS, type PredictionResult } from "./model";
+import {
+  DEFAULT_TEMPLATE,
+  hexToRgb,
+  loadTemplate,
+  tint,
+  type ReportTemplate,
+} from "./report-template";
 
 export type StudentRecord = {
   student_id: string;
@@ -17,19 +24,24 @@ export type StudentRecord = {
 
 const INK: [number, number, number] = [30, 41, 59];
 const MUTED: [number, number, number] = [100, 116, 139];
-const RED: [number, number, number] = [190, 30, 45];
-const GREEN: [number, number, number] = [13, 124, 102];
 const LINE: [number, number, number] = [214, 222, 232];
 
 export function buildReport(
   student: StudentRecord,
   result: PredictionResult,
   preparedBy: string,
+  template: ReportTemplate = DEFAULT_TEMPLATE,
 ): jsPDF {
+  const t = { ...DEFAULT_TEMPLATE, ...template };
+  const compact = t.layout === "compact";
+  const RED = hexToRgb(t.riskColor);
+  const GREEN = hexToRgb(t.safeColor);
+  const HEADER = hexToRgb(t.headerColor);
+  const ACCENT = hexToRgb(t.accentColor);
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const W = doc.internal.pageSize.getWidth();
   const H = doc.internal.pageSize.getHeight();
-  const M = 48;
+  const M = compact ? 40 : 48;
   const atRisk = result.label === 1;
   let y = 0;
 
@@ -42,35 +54,48 @@ export function buildReport(
   };
 
   const footer = () => {
+    if (!t.showFooter && !t.showPageNumbers) return;
     doc.setDrawColor(...LINE);
     doc.setLineWidth(0.6);
     doc.line(M, H - 44, W - M, H - 44);
     doc.setFont("helvetica", "normal").setFontSize(8).setTextColor(...MUTED);
-    doc.text(
-      "Student Dropout Risk Predictor - SEOK  |  Optimized Gradient Boosting Classifier  |  Decision-support only",
-      M,
-      H - 30,
-    );
-    doc.text(`Page ${doc.getNumberOfPages()}`, W - M, H - 30, { align: "right" });
+    if (t.showFooter) doc.text(t.footerText, M, H - 30);
+    if (t.showPageNumbers)
+      doc.text(`Page ${doc.getNumberOfPages()}`, W - M, H - 30, { align: "right" });
   };
 
   // Header band
-  doc.setFillColor(30, 45, 68);
-  doc.rect(0, 0, W, 96, "F");
-  doc.setFont("helvetica", "bold").setFontSize(17).setTextColor(255, 255, 255);
-  doc.text("Student Dropout Risk Predictor - SEOK", M, 42);
-  doc.setFont("helvetica", "normal").setFontSize(10).setTextColor(203, 216, 232);
-  doc.text("Early Warning System Report - Optimized Gradient Boosting Classifier", M, 62);
+  const bandH = compact ? 78 : 96;
+  doc.setFillColor(...HEADER);
+  doc.rect(0, 0, W, bandH, "F");
+  doc.setFillColor(...ACCENT);
+  doc.rect(0, bandH, W, 4, "F");
+
+  let textX = M;
+  if (t.showLogo && t.logoDataUrl) {
+    const size = compact ? 30 : 38;
+    try {
+      doc.addImage(t.logoDataUrl, "PNG", M, (bandH - size) / 2, size, size);
+      textX = M + size + 14;
+    } catch {
+      textX = M;
+    }
+  }
+
+  doc.setFont("helvetica", "bold").setFontSize(compact ? 15 : 17).setTextColor(255, 255, 255);
+  doc.text(t.orgName, textX, compact ? 32 : 42);
+  doc.setFont("helvetica", "normal").setFontSize(compact ? 9 : 10).setTextColor(212, 222, 235);
+  doc.text(`${t.reportTitle} - ${t.subtitle}`, textX, compact ? 50 : 62);
   doc.text(
     `Generated: ${new Date().toLocaleString()}   |   Prepared by: ${preparedBy}`,
-    M,
-    78,
+    textX,
+    compact ? 65 : 78,
   );
-  y = 128;
+  y = bandH + (compact ? 26 : 32);
 
   // Verdict box
-  const boxH = 76;
-  doc.setFillColor(atRisk ? 253 : 240, atRisk ? 235 : 250, atRisk ? 236 : 245);
+  const boxH = compact ? 66 : 76;
+  doc.setFillColor(...tint(atRisk ? t.riskColor : t.safeColor, 0.9));
   doc.setDrawColor(...(atRisk ? RED : GREEN));
   doc.setLineWidth(1);
   doc.roundedRect(M, y, W - M * 2, boxH, 8, 8, "FD");
@@ -87,16 +112,20 @@ export function buildReport(
   doc.text(
     atRisk ? "AT RISK OF DROPOUT (1)" : "NOT AT RISK OF DROPOUT (0)",
     M + 66,
-    y + 32,
+    y + (compact ? 26 : 32),
   );
   doc.setFont("helvetica", "normal").setFontSize(10).setTextColor(...INK);
   doc.text(
     `Risk probability: ${(result.probability * 100).toFixed(1)}%   |   Risk band: ${result.band}   |   Decision threshold: 50%`,
     M + 66,
-    y + 52,
+    y + (compact ? 44 : 52),
   );
-  doc.text(`Student ID: ${student.student_id}   |   Age: ${student.age}`, M + 66, y + 66);
-  y += boxH + 26;
+  doc.text(
+    `Student ID: ${student.student_id}   |   Age: ${student.age}`,
+    M + 66,
+    y + (compact ? 57 : 66),
+  );
+  y += boxH + (compact ? 18 : 26);
 
   const heading = (text: string) => {
     ensure(40);
@@ -120,12 +149,13 @@ export function buildReport(
       `benchmark ${FEATURE_META[key].benchmark} ${FEATURE_META[key].unit}`,
     ]),
   ];
-  doc.setFontSize(9.5);
+  doc.setFontSize(compact ? 8.5 : 9.5);
+  const rowH = compact ? 15 : 18;
   rows.forEach((row, idx) => {
-    ensure(20);
+    ensure(rowH + 2);
     if (idx % 2 === 0) {
       doc.setFillColor(247, 250, 252);
-      doc.rect(M, y - 11, W - M * 2, 18, "F");
+      doc.rect(M, y - rowH * 0.62, W - M * 2, rowH, "F");
     }
     doc.setFont("helvetica", "normal").setTextColor(...INK);
     doc.text(row[0], M + 6, y);
@@ -133,9 +163,9 @@ export function buildReport(
     doc.text(row[1], M + 250, y);
     doc.setFont("helvetica", "normal").setTextColor(...MUTED);
     doc.text(row[2], M + 340, y);
-    y += 18;
+    y += rowH;
   });
-  y += 16;
+  y += compact ? 12 : 16;
 
   // Explanation
   heading(
@@ -151,7 +181,7 @@ export function buildReport(
   doc.text(intro, M, y);
   y += intro.length * 12 + 12;
 
-  result.drivers.forEach((d) => {
+  (compact ? result.drivers.slice(0, 3) : result.drivers).forEach((d) => {
     const body = doc.splitTextToSize(d.reason, W - M * 2 - 24);
     ensure(24 + body.length * 12);
     const up = d.impact >= 0;
@@ -172,7 +202,7 @@ export function buildReport(
 
   // Recommendations
   heading("3. Recommended Interventions");
-  result.recommendations.forEach((rec, i) => {
+  (compact ? result.recommendations.slice(0, 3) : result.recommendations).forEach((rec, i) => {
     const body = doc.splitTextToSize(rec, W - M * 2 - 30);
     ensure(body.length * 12 + 8);
     doc.setFont("helvetica", "bold").setFontSize(9.5).setTextColor(...INK);
@@ -197,7 +227,7 @@ export function buildReport(
       .join(", ")}`,
     `Features used, in order: ${FEATURE_KEYS.join(", ")}`,
   ];
-  info.forEach((line) => {
+  (compact ? info.slice(0, 4) : info).forEach((line) => {
     const body = doc.splitTextToSize(line, W - M * 2 - 8);
     ensure(body.length * 12 + 4);
     doc.text(body, M + 4, y);
@@ -205,6 +235,7 @@ export function buildReport(
   });
 
   y += 10;
+  if (!compact) {
   ensure(40);
   doc.setFont("helvetica", "italic").setFontSize(8.5).setTextColor(...MUTED);
   const disclaimer = doc.splitTextToSize(
@@ -212,6 +243,7 @@ export function buildReport(
     W - M * 2 - 8,
   );
   doc.text(disclaimer, M + 4, y);
+  }
 
   footer();
   return doc;
@@ -221,7 +253,8 @@ export function downloadReport(
   student: StudentRecord,
   result: PredictionResult,
   preparedBy: string,
+  template: ReportTemplate = loadTemplate(),
 ) {
-  const doc = buildReport(student, result, preparedBy);
+  const doc = buildReport(student, result, preparedBy, template);
   doc.save(`SEOK-dropout-risk-${student.student_id}.pdf`);
 }
