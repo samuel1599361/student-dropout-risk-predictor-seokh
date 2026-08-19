@@ -29,6 +29,9 @@ export function AppHeader() {
                 <Link to="/predict">Predict</Link>
               </Button>
               <Button variant="ghost" size="sm" asChild>
+                <Link to="/bulk">Bulk CSV</Link>
+              </Button>
+              <Button variant="ghost" size="sm" asChild>
                 <Link to="/insights">Insights</Link>
               </Button>
               <Button
