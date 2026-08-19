@@ -4,13 +4,18 @@ import {
   BarChart3,
   FileDown,
   GraduationCap,
+  Search,
   ShieldCheck,
   Target,
+  Upload,
+  UserCheck,
+  XCircle,
 } from "lucide-react";
 import { AppHeader } from "@/components/AppHeader";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { FEATURE_KEYS, FEATURE_META, MODEL_METRICS } from "@/lib/model";
+
 
 export const Route = createFileRoute("/")({
   head: () => ({
