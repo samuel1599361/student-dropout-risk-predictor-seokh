@@ -256,12 +256,11 @@ export function downloadReport(
   template: ReportTemplate = loadTemplate(),
 ) {
   const doc = buildReport(student, result, preparedBy, template);
-  const fileName = `SEOK-dropout-risk-${student.student_id || "manual-entry"}.pdf`;
+  const fileName = reportFileName(student);
   const blob = doc.output("blob");
   const url = URL.createObjectURL(blob);
 
-  // Anchor download works in the editor preview iframe and on mobile browsers,
-  // where opening a blob: URL in a new tab is blocked and renders as 404.
+  // Anchor download works in the editor preview iframe and on desktop browsers.
   const a = document.createElement("a");
   a.href = url;
   a.download = fileName;
@@ -274,5 +273,90 @@ export function downloadReport(
 
   return fileName;
 }
+
+export function reportFileName(student: StudentRecord) {
+  return `SEOK-dropout-risk-${student.student_id || "manual-entry"}.pdf`;
+}
+
+export type ReportDelivery = {
+  fileName: string;
+  viewUrl: string | null;
+  downloadUrl: string | null;
+  shared: boolean;
+};
+
+/**
+ * Mobile in-app browsers silently discard blob: downloads, so the PDF never
+ * reaches the device Downloads folder. This uploads the report to private
+ * storage and returns real https links (view + force-download), and offers the
+ * native share sheet so the file can be saved to Files/Drive on phones.
+ */
+export async function deliverReport(
+  student: StudentRecord,
+  result: PredictionResult,
+  preparedBy: string,
+  template: ReportTemplate = loadTemplate(),
+): Promise<ReportDelivery> {
+  const doc = buildReport(student, result, preparedBy, template);
+  const fileName = reportFileName(student);
+  const blob = doc.output("blob");
+
+  let viewUrl: string | null = null;
+  let downloadUrl: string | null = null;
+
+  try {
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    if (user) {
+      const path = `${user.id}/${Date.now()}-${fileName}`;
+      const { error } = await supabase.storage
+        .from("reports")
+        .upload(path, blob, { contentType: "application/pdf", upsert: true });
+      if (!error) {
+        const [view, dl] = await Promise.all([
+          supabase.storage.from("reports").createSignedUrl(path, 60 * 60 * 24 * 7),
+          supabase.storage
+            .from("reports")
+            .createSignedUrl(path, 60 * 60 * 24 * 7, { download: fileName }),
+        ]);
+        viewUrl = view.data?.signedUrl ?? null;
+        downloadUrl = dl.data?.signedUrl ?? null;
+      }
+    }
+  } catch {
+    // fall through to local download
+  }
+
+  // Native share sheet: the reliable way to save a file on iOS/Android webviews.
+  let shared = false;
+  try {
+    const file = new File([blob], fileName, { type: "application/pdf" });
+    const nav = navigator as Navigator & {
+      canShare?: (data: { files?: File[] }) => boolean;
+      share?: (data: { files?: File[]; title?: string }) => Promise<void>;
+    };
+    if (nav.canShare?.({ files: [file] }) && nav.share) {
+      await nav.share({ files: [file], title: fileName });
+      shared = true;
+    }
+  } catch {
+    shared = false;
+  }
+
+  if (!shared && !downloadUrl) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 60_000);
+  }
+
+  return { fileName, viewUrl, downloadUrl, shared };
+}
+
 
 
