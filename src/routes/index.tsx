@@ -67,8 +67,8 @@ const FEATURES = [
   },
   {
     icon: BarChart3,
-    title: "Cohort insights",
-    body: "Monitor dropout prevalence, factor importance and your own prediction history across the 1,000-record cohort.",
+    title: "Database insights",
+    body: "Monitor dropout prevalence, factor importance and your own prediction history across the 1,000-record database.",
   },
 ];
 
@@ -81,7 +81,7 @@ const HOW_IT_WORKS = [
   {
     icon: Search,
     title: "Enter a Student ID",
-    body: "Look up a student from the cohort, or type the eight features manually. Values are validated and clamped to their valid ranges.",
+    body: "Look up a student from the database, or type the eight features manually. Values are validated and clamped to their valid ranges.",
   },
   {
     icon: XCircle,
@@ -91,7 +91,7 @@ const HOW_IT_WORKS = [
   {
     icon: Upload,
     title: "Bulk CSV screening",
-    body: "Upload a whole cohort, filter by risk band, and export the results table or batch-download PDF reports.",
+    body: "Upload a whole database, filter by risk band, and export the results table or batch-download PDF reports.",
   },
 ];
 
@@ -144,7 +144,7 @@ function Landing() {
               ))}
             </dl>
             <p className="mt-4 max-w-2xl text-xs text-ink-foreground/60">
-              Measured on a 1,000-record simulated cohort. Random Forest was selected because it
+              Measured on a 1,000-record simulated database. Random Forest was selected because it
               matched the top-scoring algorithms in a 10-model benchmark while adding out-of-bag
               validation, noise robustness and native factor importance — not because it beat
               them outright.
