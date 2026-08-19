@@ -2,11 +2,9 @@ import { FEATURE_KEYS, FEATURE_META, predict, type FeatureVector, type Predictio
 import type { StudentRecord } from "./report";
 
 export type BulkRow = {
-  student: StudementAlias;
+  student: StudentRecord;
   result: PredictionResult;
 };
-
-type StudementAlias = StudentRecord;
 
 export type ParseIssue = { line: number; message: string };
 
