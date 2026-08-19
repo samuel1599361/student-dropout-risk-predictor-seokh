@@ -14,7 +14,105 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      predictions: {
+        Row: {
+          created_at: string
+          id: string
+          prediction: number
+          probability: number
+          risk_band: string
+          student_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          prediction: number
+          probability: number
+          risk_band: string
+          student_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          prediction?: number
+          probability?: number
+          risk_band?: string
+          student_id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          full_name: string | null
+          id: string
+          school: string | null
+        }
+        Insert: {
+          created_at?: string
+          full_name?: string | null
+          id: string
+          school?: string | null
+        }
+        Update: {
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          school?: string | null
+        }
+        Relationships: []
+      }
+      students: {
+        Row: {
+          academic_performance: number
+          age: number
+          assignment_completion: number
+          attendance: number
+          average_score: number
+          created_at: string
+          dropout: number
+          engagement_score: number
+          id: string
+          parent_involvement: number
+          previous_failures: number
+          student_id: string
+          study_hours: number
+        }
+        Insert: {
+          academic_performance: number
+          age: number
+          assignment_completion: number
+          attendance: number
+          average_score: number
+          created_at?: string
+          dropout: number
+          engagement_score: number
+          id?: string
+          parent_involvement: number
+          previous_failures: number
+          student_id: string
+          study_hours: number
+        }
+        Update: {
+          academic_performance?: number
+          age?: number
+          assignment_completion?: number
+          attendance?: number
+          average_score?: number
+          created_at?: string
+          dropout?: number
+          engagement_score?: number
+          id?: string
+          parent_involvement?: number
+          previous_failures?: number
+          student_id?: string
+          study_hours?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
