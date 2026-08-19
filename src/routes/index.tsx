@@ -157,7 +157,7 @@ function Landing() {
         <h2 className="text-3xl font-bold">Built for early intervention</h2>
         <p className="mt-3 max-w-2xl text-muted-foreground">
           The system pairs a tuned machine learning classifier with the practical
-          information a pastoral team needs to act within days, not terms.
+          information a school’s student-support or welfare team needs to act within days, not terms.
         </p>
         <div className="mt-10 grid gap-5 sm:grid-cols-2">
           {FEATURES.map((f) => (
