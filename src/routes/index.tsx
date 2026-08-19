@@ -181,8 +181,9 @@ function Landing() {
 
           <h2 className="text-2xl font-bold">How it works for staff</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            SEOK is designed to fit a pastoral workflow: sign in, predict, review, and act. For a
-            full guide, click the help icon in the top-right corner once you are signed in.
+            SEOK is designed to fit the step-by-step process a school’s student-support or welfare
+            team follows to identify, review, and help students who may be struggling: sign in, predict,
+            review, and act. For a full guide, click the help icon in the top-right corner once you are signed in.
           </p>
           <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {HOW_IT_WORKS.map((step) => (
