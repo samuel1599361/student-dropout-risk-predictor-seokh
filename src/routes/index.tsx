@@ -16,8 +16,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { FEATURE_KEYS, FEATURE_META, MODEL_METRICS } from "@/lib/model";
 
-
 export const Route = createFileRoute("/")({
+
   head: () => ({
     meta: [
       { title: "Student Dropout Risk Predictor - SEOK Early Warning System" },
