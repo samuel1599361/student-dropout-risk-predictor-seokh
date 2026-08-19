@@ -141,10 +141,10 @@ function rawScore(row: number[]): number {
   let raw = gbModel.init;
   for (const tree of gbModel.trees) {
     let node = 0;
-    while (tree.l[node] !== -1) {
-      node = row[tree.f[node]] <= tree.t[node] ? tree.l[node] : tree.r[node];
+    while (tree.l[node]! !== -1) {
+      node = row[tree.f[node]!]! <= tree.t[node]! ? tree.l[node]! : tree.r[node]!;
     }
-    raw += gbModel.lr * tree.v[node];
+    raw += gbModel.lr * tree.v[node]!;
   }
   return raw;
 }
