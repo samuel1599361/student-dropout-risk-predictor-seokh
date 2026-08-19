@@ -72,6 +72,30 @@ const FEATURES = [
   },
 ];
 
+const HOW_IT_WORKS = [
+  {
+    icon: UserCheck,
+    title: "Sign in",
+    body: "Create an account with your school email or Google. Google users must sign in with the Google button.",
+  },
+  {
+    icon: Search,
+    title: "Enter a Student ID",
+    body: "Look up a student from the cohort, or type the eight features manually. Values are validated and clamped to their valid ranges.",
+  },
+  {
+    icon: XCircle,
+    title: "Review the verdict",
+    body: "A red X means At Risk; a teal check means Not At Risk. Read the risk drivers and recommended interventions before acting.",
+  },
+  {
+    icon: Upload,
+    title: "Bulk CSV screening",
+    body: "Upload a whole cohort, filter by risk band, and export the results table or batch-download PDF reports.",
+  },
+];
+
+
 function Landing() {
   return (
     <div className="min-h-screen">
