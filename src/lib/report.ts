@@ -112,15 +112,19 @@ export function buildReport(
   doc.text(
     atRisk ? "AT RISK OF DROPOUT (1)" : "NOT AT RISK OF DROPOUT (0)",
     M + 66,
-    y + 32,
+    y + (compact ? 26 : 32),
   );
   doc.setFont("helvetica", "normal").setFontSize(10).setTextColor(...INK);
   doc.text(
     `Risk probability: ${(result.probability * 100).toFixed(1)}%   |   Risk band: ${result.band}   |   Decision threshold: 50%`,
     M + 66,
-    y + 52,
+    y + (compact ? 44 : 52),
   );
-  doc.text(`Student ID: ${student.student_id}   |   Age: ${student.age}`, M + 66, y + 66);
+  doc.text(
+    `Student ID: ${student.student_id}   |   Age: ${student.age}`,
+    M + 66,
+    y + (compact ? 57 : 66),
+  );
   y += boxH + (compact ? 18 : 26);
 
   const heading = (text: string) => {
