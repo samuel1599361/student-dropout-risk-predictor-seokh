@@ -68,8 +68,8 @@ export function AppHeader() {
           )}
         </nav>
 
-
         {/* Mobile nav */}
+
         <div className="flex items-center gap-2 lg:hidden">
           {!user && (
             <>
