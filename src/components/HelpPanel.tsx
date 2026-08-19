@@ -114,9 +114,27 @@ export function HelpPanel({ full = false }: { full?: boolean }) {
           </div>
 
           <div className="rounded-xl border border-border bg-secondary/40 p-4">
+            <h3 className="font-semibold text-foreground">PDF report templates</h3>
+            <p className="mt-1.5 text-muted-foreground">
+              You can brand every PDF report and choose one of two layouts. Open the template editor from the top navigation bar to change it.
+            </p>
+            <ul className="mt-2 list-disc space-y-1 pl-4 text-muted-foreground">
+              <li>
+                <strong>1-page summary</strong> — compact report showing the student, verdict, top 3 risk drivers and 3 recommended interventions. Best for quick handouts or parent meetings.
+              </li>
+              <li>
+                <strong>2-page full report</strong> — detailed report with all drivers, every recommendation, the full model card and disclaimer. Best for referrals, records, and in-depth review.
+              </li>
+              <li>
+                Upload your school logo, set header/footer text, and pick header, accent, risk and safe colours. Saved changes apply to all future PDFs from the Predictor and Bulk Screening pages.
+              </li>
+            </ul>
+          </div>
+
+          <div className="rounded-xl border border-border bg-secondary/40 p-4">
             <h3 className="font-semibold text-foreground">Important reminders</h3>
             <ul className="mt-2 list-disc space-y-1 pl-4 text-muted-foreground">
-              <li>The model was trained on a simulated cohort; validate with real data before use.</li>
+              <li>The model was trained on a simulated database; validate with real data before use.</li>
               <li>Always review at-risk flags with a human before acting.</li>
               <li>Protect student data and follow local data-protection rules.</li>
             </ul>
