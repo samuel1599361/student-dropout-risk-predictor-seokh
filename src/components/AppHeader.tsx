@@ -6,8 +6,8 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useAuth } from "@/hooks/useAuth";
 import { HelpPanel } from "@/components/HelpPanel";
 
-
 const NAV_LINKS = [
+
   { to: "/predict", label: "Predict" },
   { to: "/bulk", label: "Bulk CSV" },
   { to: "/students", label: "Students" },
