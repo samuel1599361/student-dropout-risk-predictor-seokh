@@ -152,21 +152,33 @@ function Landing() {
           <h2 className="text-2xl font-bold">The eight predictive features</h2>
           <p className="mt-2 text-sm text-muted-foreground">
             Used in this exact order by the model, alongside Student ID as identifier and
-            Dropout as the target variable.
+            Dropout as the target variable. Values outside the stated range are clamped to the
+            nearest valid boundary during prediction.
           </p>
           <ol className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {FEATURE_KEYS.map((key, i) => (
-              <li
-                key={key}
-                className="rounded-xl border border-border bg-card p-4 shadow-soft"
-              >
-                <span className="font-display text-xs font-bold text-primary">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="mt-1 font-semibold">{FEATURE_META[key].label}</p>
-                <p className="mt-1 text-xs text-muted-foreground">{FEATURE_META[key].help}</p>
-              </li>
-            ))}
+            {FEATURE_KEYS.map((key, i) => {
+              const meta = FEATURE_META[key];
+              return (
+                <li
+                  key={key}
+                  className="rounded-xl border border-border bg-card p-4 shadow-soft"
+                >
+                  <span className="font-display text-xs font-bold text-primary">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="mt-1 font-semibold">{meta.label}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{meta.help}</p>
+                  <div className="mt-3 flex flex-wrap items-center gap-2">
+                    <span className="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary">
+                      Range: {meta.min} – {meta.max} {meta.unit}
+                    </span>
+                    <span className="inline-flex items-center rounded-md bg-muted px-2 py-1 text-xs font-medium text-muted-foreground">
+                      Benchmark: {meta.benchmark} {meta.unit}
+                    </span>
+                  </div>
+                </li>
+              );
+            })}
           </ol>
         </div>
       </section>
