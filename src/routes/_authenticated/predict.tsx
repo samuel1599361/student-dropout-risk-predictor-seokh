@@ -25,7 +25,8 @@ import {
   type FeatureVector,
   type PredictionResult,
 } from "@/lib/model";
-import { downloadReport, type StudentRecord } from "@/lib/report";
+import { deliverReport, type ReportDelivery, type StudentRecord } from "@/lib/report";
+import { ReportLinkDialog } from "@/components/ReportLinkDialog";
 
 export const Route = createFileRoute("/_authenticated/predict")({
   head: () => ({
@@ -96,6 +97,8 @@ function PredictPage() {
   const [result, setResult] = useState<PredictionResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [manual, setManual] = useState(false);
+  const [delivery, setDelivery] = useState<ReportDelivery | null>(null);
+  const [exporting, setExporting] = useState(false);
 
   const preparedBy =
     (user?.user_metadata?.["full_name"] as string | undefined) || user?.email || "School staff";
@@ -280,13 +283,25 @@ function PredictPage() {
                 </div>
                 <Button
                   size="lg"
+                  disabled={exporting}
                   onClick={() => {
-                    downloadReport(student, result, preparedBy);
-                    toast.success("PDF report downloaded");
+                    setExporting(true);
+                    void deliverReport(student, result, preparedBy)
+                      .then((d) => {
+                        setDelivery(d);
+                        if (!d.viewUrl && !d.downloadUrl && !d.shared)
+                          toast.success("PDF report downloaded");
+                      })
+                      .catch(() => toast.error("Could not generate the PDF report"))
+                      .finally(() => setExporting(false));
                   }}
                 >
-                  <FileDown className="size-4" />
-                  Download PDF report
+                  {exporting ? (
+                    <Loader2 className="size-4 animate-spin" />
+                  ) : (
+                    <FileDown className="size-4" />
+                  )}
+                  Get PDF report
                 </Button>
               </CardContent>
             </Card>
@@ -391,6 +406,7 @@ function PredictPage() {
           </div>
         )}
       </main>
+      <ReportLinkDialog delivery={delivery} onClose={() => setDelivery(null)} />
     </div>
   );
 }

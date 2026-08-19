@@ -32,7 +32,8 @@ import {
   type BulkRow,
   type ParseIssue,
 } from "@/lib/bulk";
-import { downloadReport } from "@/lib/report";
+import { deliverReport, downloadReport, type ReportDelivery } from "@/lib/report";
+import { ReportLinkDialog } from "@/components/ReportLinkDialog";
 
 export const Route = createFileRoute("/_authenticated/bulk")({
   head: () => ({
@@ -115,6 +116,8 @@ function BulkPage() {
       setBusy(false);
     }
   };
+
+  const [delivery, setDelivery] = useState<ReportDelivery | null>(null);
 
   const downloadAll = async (subset: BulkRow[]) => {
     if (subset.length === 0) return;
@@ -310,7 +313,9 @@ function BulkPage() {
                           <Button
                             variant="ghost"
                             size="sm"
-                            onClick={() => downloadReport(student, result, preparedBy)}
+                            onClick={() => {
+                              void deliverReport(student, result, preparedBy).then(setDelivery);
+                            }}
                           >
                             <FileDown className="size-4" />
                             PDF
@@ -325,6 +330,7 @@ function BulkPage() {
           </Card>
         ) : null}
       </main>
+      <ReportLinkDialog delivery={delivery} onClose={() => setDelivery(null)} />
     </div>
   );
 }
