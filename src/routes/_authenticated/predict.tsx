@@ -262,7 +262,15 @@ function PredictPage() {
                         {(result.probability * 100).toFixed(1)}%
                       </span>
                     </div>
-                    <Progress value={result.probability * 100} className="mt-2" />
+                    <div className="mt-2 h-2.5 w-full overflow-hidden rounded-full bg-muted">
+                      <div
+                        className={`h-full rounded-full transition-all ${
+                          atRisk ? "bg-risk" : "bg-safe"
+                        }`}
+                        style={{ width: `${Math.max(2, result.probability * 100)}%` }}
+                      />
+                    </div>
+
                     <div className="mt-2 flex items-center gap-2 text-xs text-muted-foreground">
                       <Badge variant={atRisk ? "destructive" : "secondary"}>
                         {result.band} risk band
