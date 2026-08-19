@@ -140,7 +140,7 @@ function BulkPage() {
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
             Upload a CSV containing StudentID, Age and the eight predictive features. Every row is
-            scored with the optimized Gradient Boosting classifier, and results are returned as a
+            scored with the optimized Random Forest classifier, and results are returned as a
             downloadable table plus per-student PDF intervention reports.
           </p>
         </header>

@@ -14,7 +14,9 @@ export const FEATURE_KEYS = [
 export type FeatureKey = (typeof FEATURE_KEYS)[number];
 
 type Tree = { l: number[]; r: number[]; f: number[]; t: number[]; v: number[] };
-type GbModel = {
+type EnsembleModel = {
+  kind?: "rf" | "gb";
+  model_name?: string;
   features: string[];
   init: number;
   lr: number;
@@ -27,16 +29,19 @@ type GbModel = {
     recall: number;
     f1: number;
     confusion: number[][];
-    best_params: Record<string, number>;
+    best_params: Record<string, number | string>;
     n_train: number;
     n_test: number;
     positive_rate: number;
   };
 };
 
-export const gbModel = modelJson as unknown as GbModel;
+export const gbModel = modelJson as unknown as EnsembleModel;
+export const MODEL_KIND = gbModel.kind ?? "gb";
+export const MODEL_NAME = gbModel.model_name ?? "Optimized Random Forest Classifier";
 export const MODEL_METRICS = gbModel.metrics;
 export const FEATURE_IMPORTANCE = gbModel.importances;
+
 
 export type FeatureVector = Record<FeatureKey, number>;
 
@@ -154,7 +159,9 @@ export function toRow(features: FeatureVector): number[] {
 }
 
 export function probability(features: FeatureVector): number {
-  return sigmoid(rawScore(toRow(features)));
+  const raw = rawScore(toRow(features));
+  // Random forest leaves already hold class probabilities (averaged via lr = 1/n_trees).
+  return MODEL_KIND === "rf" ? Math.min(1, Math.max(0, raw)) : sigmoid(raw);
 }
 
 export type RiskBand = "Low" | "Moderate" | "Elevated" | "High";

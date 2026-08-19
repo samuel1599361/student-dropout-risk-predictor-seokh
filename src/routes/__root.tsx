@@ -83,14 +83,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "description",
         content:
-          "Early warning system predicting student dropout risk with an optimized Gradient Boosting classifier.",
+          "Early warning system predicting student dropout risk with an optimized Random Forest classifier.",
       },
       { name: "author", content: "SEOK" },
       { property: "og:title", content: "Student Dropout Risk Predictor — SEOK" },
       {
         property: "og:description",
         content:
-          "Early warning system predicting student dropout risk with an optimized Gradient Boosting classifier.",
+          "Early warning system predicting student dropout risk with an optimized Random Forest classifier.",
       },
       { property: "og:type", content: "website" },
 

@@ -201,7 +201,7 @@ function AuthPage() {
             Identify at-risk students before they disappear.
           </h1>
           <p className="mt-5 max-w-md text-ink-foreground/75">
-            A tuned Gradient Boosting classifier scores each student on eight evidence-based
+            A tuned Random Forest classifier scores each student on eight evidence-based
             factors and hands your team an explained, actionable case report.
           </p>
           <ul className="mt-8 space-y-2 text-sm text-ink-foreground/80">

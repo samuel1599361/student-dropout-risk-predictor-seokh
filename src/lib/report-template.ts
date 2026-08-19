@@ -19,9 +19,9 @@ export type ReportTemplate = {
 export const DEFAULT_TEMPLATE: ReportTemplate = {
   orgName: "Student Dropout Risk Predictor - SEOK",
   reportTitle: "Early Warning System Report",
-  subtitle: "Optimized Gradient Boosting Classifier",
+  subtitle: "Optimized Random Forest Classifier",
   footerText:
-    "Student Dropout Risk Predictor - SEOK  |  Optimized Gradient Boosting Classifier  |  Decision-support only",
+    "Student Dropout Risk Predictor - SEOK  |  Optimized Random Forest Classifier  |  Decision-support only",
   headerColor: "#1e2d44",
   accentColor: "#0f6f86",
   riskColor: "#be1e2d",
