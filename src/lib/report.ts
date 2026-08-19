@@ -38,7 +38,6 @@ export function buildReport(
   const GREEN = hexToRgb(t.safeColor);
   const HEADER = hexToRgb(t.headerColor);
   const ACCENT = hexToRgb(t.accentColor);
-  const scale = compact ? 0.82 : 1;
   const doc = new jsPDF({ unit: "pt", format: "a4" });
   const W = doc.internal.pageSize.getWidth();
   const H = doc.internal.pageSize.getHeight();
