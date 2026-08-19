@@ -4,6 +4,8 @@ import { GraduationCap, LogOut, Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useAuth } from "@/hooks/useAuth";
+import { HelpPanel } from "@/components/HelpPanel";
+
 
 const NAV_LINKS = [
   { to: "/predict", label: "Predict" },
