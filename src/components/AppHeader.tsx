@@ -38,7 +38,7 @@ export function AppHeader() {
               Dropout Risk Predictor
             </span>
             <span className="block truncate text-[11px] font-medium tracking-wide text-muted-foreground">
-              SEOK Early Warning System
+              SEOKH Early Warning System
             </span>
           </span>
         </Link>

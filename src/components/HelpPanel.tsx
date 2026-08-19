@@ -43,7 +43,7 @@ const ROUTE_GUIDE = [
   {
     icon: Layout,
     title: "Home (/)",
-    body: "The landing page with an overview of SEOK, how it works, and the feature ranges.",
+    body: "The landing page with an overview of SEOKH, how it works, and the feature ranges.",
   },
   {
     icon: LogIn,
@@ -104,13 +104,13 @@ export function HelpPanel({ full = false }: { full?: boolean }) {
         <SheetHeader className="mb-6">
           <SheetTitle className="flex items-center gap-2 text-lg">
             <BookOpen className="size-5 text-primary" />
-            SEOK Quick Guide
+            SEOKH Quick Guide
           </SheetTitle>
         </SheetHeader>
 
         <div className="space-y-6 text-sm">
           <div className="rounded-xl border border-border bg-secondary/40 p-4">
-            <h3 className="font-semibold text-foreground">What SEOK is</h3>
+            <h3 className="font-semibold text-foreground">What SEOKH is</h3>
             <p className="mt-1.5 text-muted-foreground">
               An AI-powered early warning system that predicts whether a student is at risk of
               dropping out. It is decision support — always review results with professional

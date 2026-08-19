@@ -24,13 +24,13 @@ export const Route = createFileRoute("/_authenticated/template")({
   component: TemplateEditor,
   head: () => ({
     meta: [
-      { title: "PDF Report Template Editor | SEOK Early Warning System" },
+      { title: "PDF Report Template Editor | SEOKH Early Warning System" },
       {
         name: "description",
         content:
           "Customise dropout risk report branding: logo, colors, header and footer text, and choose a 1-page or 2-page PDF layout.",
       },
-      { property: "og:title", content: "PDF Report Template Editor | SEOK" },
+      { property: "og:title", content: "PDF Report Template Editor | SEOKH" },
       {
         property: "og:description",
         content:
@@ -101,7 +101,7 @@ function TemplateEditor() {
       const url = URL.createObjectURL(doc.output("blob"));
       const a = document.createElement("a");
       a.href = url;
-      a.download = `SEOK-template-preview-${SAMPLE.student_id}.pdf`;
+      a.download = `SEOKH-template-preview-${SAMPLE.student_id}.pdf`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -340,7 +340,7 @@ function TemplateEditor() {
               onClick={() => {
                 resetTemplate();
                 setTemplate(DEFAULT_TEMPLATE);
-                toast.success("Reset to the default SEOK template");
+                toast.success("Reset to the default SEOKH template");
               }}
             >
               <RotateCcw className="size-4" />

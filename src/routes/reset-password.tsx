@@ -11,16 +11,16 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/reset-password")({
   head: () => ({
     meta: [
-      { title: "Set a new password — Dropout Risk Predictor SEOK" },
+      { title: "Set a new password — Dropout Risk Predictor SEOKH" },
       {
         name: "description",
         content:
-          "Choose a new password for your SEOK Early Warning System staff account using your secure reset link.",
+          "Choose a new password for your SEOKH Early Warning System staff account using your secure reset link.",
       },
-      { property: "og:title", content: "Set a new password — Dropout Risk Predictor SEOK" },
+      { property: "og:title", content: "Set a new password — Dropout Risk Predictor SEOKH" },
       {
         property: "og:description",
-        content: "Complete your password reset for the SEOK dropout Early Warning System.",
+        content: "Complete your password reset for the SEOKH dropout Early Warning System.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

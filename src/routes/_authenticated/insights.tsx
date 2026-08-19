@@ -19,13 +19,13 @@ export const Route = createFileRoute("/_authenticated/insights")({
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Cohort insights — Dropout Risk Predictor SEOK" },
+      { title: "Cohort insights — Dropout Risk Predictor SEOKH" },
       {
         name: "description",
         content:
-          "Model performance, factor importance, cohort dropout prevalence and your recent prediction history in the SEOK Early Warning System.",
+          "Model performance, factor importance, cohort dropout prevalence and your recent prediction history in the SEOKH Early Warning System.",
       },
-      { property: "og:title", content: "Cohort insights — Dropout Risk Predictor SEOK" },
+      { property: "og:title", content: "Cohort insights — Dropout Risk Predictor SEOKH" },
       {
         property: "og:description",
         content: "Model performance and cohort dropout analytics for school staff.",

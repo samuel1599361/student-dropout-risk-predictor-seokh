@@ -1,6 +1,6 @@
-# SEOK User Guide — School Administrators & Staff
+# SEOKH User Guide — School Administrators & Staff
 
-## What SEOK is
+## What SEOKH is
 - An AI-powered **early warning system** for student dropout risk.
 - It classifies each student as **At Risk of Dropout (1)** or **Not At Risk of Dropout (0)**.
 - It returns a probability, a risk band, the main risk drivers, and recommended interventions.

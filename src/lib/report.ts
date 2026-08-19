@@ -277,7 +277,7 @@ export function downloadReport(
 }
 
 export function reportFileName(student: StudentRecord) {
-  return `SEOK-dropout-risk-${student.student_id || "manual-entry"}.pdf`;
+  return `SEOKH-dropout-risk-${student.student_id || "manual-entry"}.pdf`;
 }
 
 export type ReportDelivery = {
