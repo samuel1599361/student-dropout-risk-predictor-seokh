@@ -52,17 +52,22 @@ export function AppHeader() {
                   <Link to={link.to}>{link.label}</Link>
                 </Button>
               ))}
+              <HelpPanel />
               <Button variant="outline" size="sm" onClick={handleSignOut}>
                 <LogOut className="size-4" />
                 Sign out
               </Button>
             </>
           ) : (
-            <Button size="sm" asChild>
-              <Link to="/auth">Staff sign in</Link>
-            </Button>
+            <>
+              <HelpPanel />
+              <Button size="sm" asChild>
+                <Link to="/auth">Staff sign in</Link>
+              </Button>
+            </>
           )}
         </nav>
+
 
         {/* Mobile nav */}
         <div className="flex items-center gap-2 lg:hidden">
