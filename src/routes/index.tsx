@@ -95,8 +95,8 @@ const HOW_IT_WORKS = [
   },
 ];
 
-
 function Landing() {
+
   return (
     <div className="min-h-screen">
       <AppHeader />
