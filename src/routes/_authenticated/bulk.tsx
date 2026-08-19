@@ -38,13 +38,13 @@ import { ReportLinkDialog } from "@/components/ReportLinkDialog";
 export const Route = createFileRoute("/_authenticated/bulk")({
   head: () => ({
     meta: [
-      { title: "Bulk CSV predictions — Dropout Risk Predictor SEOK" },
+      { title: "Bulk CSV predictions — Dropout Risk Predictor SEOKH" },
       {
         name: "description",
         content:
           "Upload a CSV of students to score the whole cohort at once, review risk verdicts in a table, and download the results file or per-student PDF reports.",
       },
-      { property: "og:title", content: "Bulk CSV predictions — Dropout Risk Predictor SEOK" },
+      { property: "og:title", content: "Bulk CSV predictions — Dropout Risk Predictor SEOKH" },
       {
         property: "og:description",
         content:
@@ -175,7 +175,7 @@ function BulkPage() {
             </Button>
             <Button
               variant="outline"
-              onClick={() => downloadTextFile("SEOK-bulk-template.csv", csvTemplate())}
+              onClick={() => downloadTextFile("SEOKH-bulk-template.csv", csvTemplate())}
             >
               <FileSpreadsheet className="size-4" />
               Download CSV template
@@ -225,7 +225,7 @@ function BulkPage() {
                     size="sm"
                     onClick={() =>
                       downloadTextFile(
-                        `SEOK-bulk-results-${new Date().toISOString().slice(0, 10)}.csv`,
+                        `SEOKH-bulk-results-${new Date().toISOString().slice(0, 10)}.csv`,
                         resultsToCsv(visible),
                       )
                     }

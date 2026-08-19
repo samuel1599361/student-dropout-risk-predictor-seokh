@@ -20,13 +20,13 @@ import { FEATURE_KEYS, FEATURE_META, predict, type FeatureVector } from "@/lib/m
 export const Route = createFileRoute("/_authenticated/students")({
   head: () => ({
     meta: [
-      { title: "Student records — Dropout Risk Predictor SEOK" },
+      { title: "Student records — Dropout Risk Predictor SEOKH" },
       {
         name: "description",
         content:
-          "Add new student records and edit existing ones: Student ID, age and the eight predictive features used by the SEOK dropout early warning model.",
+          "Add new student records and edit existing ones: Student ID, age and the eight predictive features used by the SEOKH dropout early warning model.",
       },
-      { property: "og:title", content: "Student records — Dropout Risk Predictor SEOK" },
+      { property: "og:title", content: "Student records — Dropout Risk Predictor SEOKH" },
       {
         property: "og:description",
         content: "School administrators can enter and edit student records for risk screening.",

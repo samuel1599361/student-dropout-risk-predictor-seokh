@@ -79,14 +79,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Student Dropout Risk Predictor — SEOK" },
+      { title: "Student Dropout Risk Predictor — SEOKH" },
       {
         name: "description",
         content:
           "Early warning system predicting student dropout risk with an optimized Random Forest classifier.",
       },
-      { name: "author", content: "SEOK" },
-      { property: "og:title", content: "Student Dropout Risk Predictor — SEOK" },
+      { name: "author", content: "SEOKH" },
+      { property: "og:title", content: "Student Dropout Risk Predictor — SEOKH" },
       {
         property: "og:description",
         content:

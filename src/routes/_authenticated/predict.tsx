@@ -31,13 +31,13 @@ import { ReportLinkDialog } from "@/components/ReportLinkDialog";
 export const Route = createFileRoute("/_authenticated/predict")({
   head: () => ({
     meta: [
-      { title: "Run a prediction — Dropout Risk Predictor SEOK" },
+      { title: "Run a prediction — Dropout Risk Predictor SEOKH" },
       {
         name: "description",
         content:
           "Enter a Student ID to generate an explained dropout risk prediction and download the PDF intervention report.",
       },
-      { property: "og:title", content: "Run a prediction — Dropout Risk Predictor SEOK" },
+      { property: "og:title", content: "Run a prediction — Dropout Risk Predictor SEOKH" },
       {
         property: "og:description",
         content: "Explained dropout risk predictions for school staff, with PDF reports.",

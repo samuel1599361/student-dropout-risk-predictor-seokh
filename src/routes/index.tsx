@@ -20,7 +20,7 @@ export const Route = createFileRoute("/")({
 
   head: () => ({
     meta: [
-      { title: "Student Dropout Risk Predictor - SEOK Early Warning System" },
+      { title: "Student Dropout Risk Predictor - SEOKH Early Warning System" },
       {
         name: "description",
         content:
@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
       },
       {
         property: "og:title",
-        content: "Student Dropout Risk Predictor - SEOK Early Warning System",
+        content: "Student Dropout Risk Predictor - SEOKH Early Warning System",
       },
       {
         property: "og:description",
@@ -110,7 +110,7 @@ function Landing() {
             </span>
             <h1 className="mt-6 text-balance-tight text-4xl font-bold text-ink-foreground sm:text-6xl">
               Student Dropout Risk Predictor
-              <span className="block text-ink-foreground/70">— SEOK</span>
+              <span className="block text-ink-foreground/70">— SEOKH</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-ink-foreground/80">
               An early warning system for school administrators. Enter a Student ID, and the
@@ -181,7 +181,7 @@ function Landing() {
 
           <h2 className="text-2xl font-bold">How it works for staff</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            SEOK is designed to fit the step-by-step process a school’s student-support or welfare
+            SEOKH is designed to fit the step-by-step process a school’s student-support or welfare
             team follows to identify, review, and help students who may be struggling: sign in, predict,
             review, and act. For a full guide, click the help icon in the top-right corner once you are signed in.
           </p>
@@ -243,7 +243,7 @@ function Landing() {
       <footer className="mx-auto flex max-w-6xl flex-col items-start gap-3 px-4 py-12 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
         <span className="flex items-center gap-2">
           <GraduationCap className="size-4" />
-          Student Dropout Risk Predictor — SEOK
+          Student Dropout Risk Predictor — SEOKH
         </span>
         <span>Decision support only. Always combine with professional judgement.</span>
       </footer>

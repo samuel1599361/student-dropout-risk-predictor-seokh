@@ -1,6 +1,6 @@
-# Student Dropout Risk Predictor — SEOK
+# Student Dropout Risk Predictor — SEOKH
 
-**SEOK Early Warning System** is an AI-powered web application that helps school
+**SEOKH Early Warning System** is an AI-powered web application that helps school
 administrators identify students at risk of dropping out, understand *why* they
 are at risk, and act on concrete, prioritised interventions.
 

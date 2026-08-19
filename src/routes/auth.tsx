@@ -22,16 +22,16 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Staff sign in — Dropout Risk Predictor SEOK" },
+      { title: "Staff sign in — Dropout Risk Predictor SEOKH" },
       {
         name: "description",
         content:
-          "Sign in or create a school staff account to run student dropout risk predictions on the SEOK Early Warning System.",
+          "Sign in or create a school staff account to run student dropout risk predictions on the SEOKH Early Warning System.",
       },
-      { property: "og:title", content: "Staff sign in — Dropout Risk Predictor SEOK" },
+      { property: "og:title", content: "Staff sign in — Dropout Risk Predictor SEOKH" },
       {
         property: "og:description",
-        content: "Secure access for school staff to the SEOK dropout Early Warning System.",
+        content: "Secure access for school staff to the SEOKH dropout Early Warning System.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -138,7 +138,7 @@ function AuthPage() {
         });
         if (error) throw error;
         if (data.session) {
-          toast.success("Welcome to the SEOK Early Warning System");
+          toast.success("Welcome to the SEOKH Early Warning System");
           router.navigate({ to: "/predict" });
           return;
         }
@@ -194,7 +194,7 @@ function AuthPage() {
           <span className="flex size-9 items-center justify-center rounded-lg bg-ink-foreground/15">
             <GraduationCap className="size-5" />
           </span>
-          <span className="font-display font-bold">SEOK Early Warning System</span>
+          <span className="font-display font-bold">SEOKH Early Warning System</span>
         </Link>
         <div>
           <h1 className="max-w-md text-balance-tight text-4xl font-bold text-ink-foreground">
