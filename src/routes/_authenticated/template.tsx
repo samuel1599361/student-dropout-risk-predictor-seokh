@@ -84,7 +84,6 @@ function ColorField({
 function TemplateEditor() {
   const { user } = useAuth();
   const [template, setTemplate] = useState<ReportTemplate>(DEFAULT_TEMPLATE);
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
