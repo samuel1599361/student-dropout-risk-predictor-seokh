@@ -104,6 +104,7 @@ export function AppHeader() {
                         <Link to={link.to}>{link.label}</Link>
                       </Button>
                     ))}
+                    <HelpPanel full />
                   </nav>
                   <Button variant="outline" className="mt-6 w-full" onClick={handleSignOut}>
                     <LogOut className="size-4" />
