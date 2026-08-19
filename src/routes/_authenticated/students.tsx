@@ -164,14 +164,19 @@ function StudentsPage() {
       return;
     }
     setSaving(true);
-    const payload: Record<string, number | string> = {
+    const payload = {
       student_id: ok.id,
       age: ok.age,
       dropout: ok.dropout,
+      parent_involvement: Number(form["ParentInvolvement"]),
+      previous_failures: Number(form["PreviousFailures"]),
+      assignment_completion: Number(form["AssignmentCompletion"]),
+      attendance: Number(form["Attendance"]),
+      academic_performance: Number(form["AcademicPerformance"]),
+      average_score: Number(form["AverageScore"]),
+      engagement_score: Number(form["EngagementScore"]),
+      study_hours: Number(form["StudyHours"]),
     };
-    FEATURE_KEYS.forEach((k) => {
-      payload[COLUMN_OF[k]!] = Number(form[k]);
-    });
 
     if (editingId) {
       const { error } = await supabase.from("students").update(payload).eq("id", editingId);
