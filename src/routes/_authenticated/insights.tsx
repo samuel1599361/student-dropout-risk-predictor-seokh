@@ -166,6 +166,41 @@ function InsightsBody() {
 
       <Card className="border-border/70 shadow-soft">
         <CardHeader>
+          <CardTitle className="text-lg">Why Random Forest was selected</CardTitle>
+          <CardDescription>
+            Ten algorithms were trained, tuned and compared on the same cohort and split.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-3 text-sm text-muted-foreground">
+          <p>
+            Random Forest achieved near-perfect performance (accuracy{" "}
+            {(MODEL_METRICS.accuracy * 100).toFixed(1)}%, ROC-AUC{" "}
+            {MODEL_METRICS.roc_auc.toFixed(4)}) and was selected as the final model because it{" "}
+            <span className="font-medium text-foreground">matched</span> the top-performing
+            algorithms rather than beating them. On this low-noise simulated cohort several
+            candidates — Logistic Regression, Naive Bayes, k-NN, SVM (RBF), AdaBoost and an MLP
+            — saturate at perfect scores, so the choice was decided on non-accuracy criteria:
+          </p>
+          <ul className="ml-4 list-disc space-y-1.5">
+            <li>Out-of-bag validation built into bagging, alongside cross-validation.</li>
+            <li>Stability under label-noise stress tests and reseeded splits.</li>
+            <li>
+              Native impurity-based factor importance, which powers the driver explanations in
+              this app and in the PDF reports.
+            </li>
+            <li>No feature scaling required across the mixed feature ranges.</li>
+            <li>Compact tree structure that exports cleanly for in-browser inference.</li>
+          </ul>
+          <p>
+            Only the single Decision Tree is materially weaker. Because the cohort is simulated
+            and low-noise, these results should not be read as evidence that Random Forest is
+            superior on real school records.
+          </p>
+        </CardContent>
+      </Card>
+
+      <Card className="border-border/70 shadow-soft">
+        <CardHeader>
           <CardTitle className="text-lg">Your recent predictions</CardTitle>
           <CardDescription>The last 12 screenings you ran.</CardDescription>
         </CardHeader>
