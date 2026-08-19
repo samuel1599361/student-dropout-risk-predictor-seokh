@@ -62,6 +62,8 @@ function friendlyError(message: string): string {
     return "Your email isn't confirmed yet. Open the confirmation link we emailed you.";
   if (m.includes("already registered") || m.includes("already been registered"))
     return "An account with this email already exists — switch to Sign in instead.";
+  if (m.includes("weak") || m.includes("pwned"))
+    return "That password appears in known data breaches. Please pick a longer, unique password (try 3 random words plus a number).";
   if (m.includes("password should be at least"))
     return "Please choose a password with at least 8 characters.";
   if (m.includes("rate limit") || m.includes("too many"))
