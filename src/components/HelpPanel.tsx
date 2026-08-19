@@ -34,15 +34,23 @@ const HOW_IT_WORKS = [
   },
 ];
 
-export function HelpPanel() {
+export function HelpPanel({ full = false }: { full?: boolean }) {
   const [open, setOpen] = useState(false);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" aria-label="Open help">
-          <HelpCircle className="size-5" />
-        </Button>
+        {full ? (
+          <Button variant="ghost" className="justify-start">
+            <HelpCircle className="size-4" />
+            Help &amp; guide
+          </Button>
+        ) : (
+          <Button variant="outline" size="sm" aria-label="Open help">
+            <HelpCircle className="size-4" />
+            Help
+          </Button>
+        )}
       </SheetTrigger>
       <SheetContent side="right" className="w-full max-w-md overflow-y-auto p-6 sm:max-w-lg">
         <SheetHeader className="mb-6">
