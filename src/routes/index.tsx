@@ -176,7 +176,8 @@ function Landing() {
         </div>
       </section>
 
-      <section className="border-y border-border/70 bg-secondary/50">
+      <section className="bg-secondary/50">
+
         <div className="mx-auto max-w-6xl px-4 py-16">
           <h2 className="text-2xl font-bold">How it works for staff</h2>
           <p className="mt-2 text-sm text-muted-foreground">
