@@ -162,7 +162,7 @@ function PredictPage() {
             <h1 className="text-3xl font-bold">Dropout risk prediction</h1>
             <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
               Look up a student from the records, or enter the eight features manually. The
-              optimized Gradient Boosting classifier returns the verdict, the reasoning and
+              optimized Random Forest classifier returns the verdict, the reasoning and
               recommended interventions.
             </p>
           </div>

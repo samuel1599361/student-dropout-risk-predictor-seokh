@@ -64,7 +64,7 @@ function InsightsPage() {
       <main className="mx-auto max-w-6xl px-4 py-10">
         <h1 className="text-3xl font-bold">Cohort insights</h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          How the optimized Gradient Boosting classifier performs, which factors carry the most
+          How the optimized Random Forest classifier performs, which factors carry the most
           predictive weight, and what your team has been screening.
         </p>
 
@@ -147,7 +147,7 @@ function InsightsBody() {
             <CardDescription>Training and validation summary.</CardDescription>
           </CardHeader>
           <CardContent className="space-y-3 text-sm">
-            <Row label="Algorithm" value="Gradient Boosting Classifier" />
+            <Row label="Algorithm" value="Optimized Random Forest Classifier" />
             <Row label="Task" value="Binary classification" />
             <Row label="Target" value="Dropout (0 / 1)" />
             <Row label="Identifier" value="Student ID" />

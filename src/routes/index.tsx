@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Predict student dropout risk with an optimized Gradient Boosting model. Enter a Student ID, get an explained risk verdict and a downloadable PDF intervention report.",
+          "Predict student dropout risk with an optimized Random Forest model. Enter a Student ID, get an explained risk verdict and a downloadable PDF intervention report.",
       },
       {
         property: "og:title",
@@ -77,7 +77,7 @@ function Landing() {
           <div className="max-w-3xl">
             <span className="inline-flex items-center gap-2 rounded-full border border-ink-foreground/25 bg-ink-foreground/10 px-3 py-1 text-xs font-semibold tracking-wide text-ink-foreground">
               <ShieldCheck className="size-3.5" />
-              Optimized Gradient Boosting Classifier
+              Optimized Random Forest Classifier
             </span>
             <h1 className="mt-6 text-balance-tight text-4xl font-bold text-ink-foreground sm:text-6xl">
               Student Dropout Risk Predictor

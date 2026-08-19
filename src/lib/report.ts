@@ -174,8 +174,8 @@ export function buildReport(
   doc.setFont("helvetica", "normal").setFontSize(9.5).setTextColor(...INK);
   const intro = doc.splitTextToSize(
     atRisk
-      ? `The optimized Gradient Boosting model estimates a ${(result.probability * 100).toFixed(1)}% probability of dropout, above the 50% decision threshold. The factors below are ranked by their measured contribution to this student's risk. Each contribution is computed by re-scoring the student with that single factor moved to the cohort benchmark, holding every other factor constant.`
-      : `The optimized Gradient Boosting model estimates a ${(result.probability * 100).toFixed(1)}% probability of dropout, below the 50% decision threshold. The factors below are ranked by their contribution; positive values push risk up, negative values are protective.`,
+      ? `The optimized Random Forest model estimates a ${(result.probability * 100).toFixed(1)}% probability of dropout, above the 50% decision threshold. The factors below are ranked by their measured contribution to this student's risk. Each contribution is computed by re-scoring the student with that single factor moved to the cohort benchmark, holding every other factor constant.`
+      : `The optimized Random Forest model estimates a ${(result.probability * 100).toFixed(1)}% probability of dropout, below the 50% decision threshold. The factors below are ranked by their contribution; positive values push risk up, negative values are protective.`,
     W - M * 2 - 8,
   );
   doc.text(intro, M, y);
@@ -218,7 +218,7 @@ export function buildReport(
   doc.setFont("helvetica", "normal").setFontSize(9.5).setTextColor(...INK);
   const m = MODEL_METRICS;
   const info = [
-    `Algorithm: Gradient Boosting Classifier (hyperparameter-tuned, 5-fold cross-validated)`,
+    `Algorithm: Random Forest Classifier (hyperparameter-tuned, 5-fold cross-validated)`,
     `Task: binary classification - At Risk of Dropout (1) vs Not At Risk of Dropout (0)`,
     `Training data: 1,000 simulated student records (${m.n_train} train / ${m.n_test} hold-out test)`,
     `Hold-out performance: Accuracy ${(m.accuracy * 100).toFixed(1)}%  |  ROC-AUC ${m.roc_auc.toFixed(3)}  |  Precision ${(m.precision * 100).toFixed(1)}%  |  Recall ${(m.recall * 100).toFixed(1)}%  |  F1 ${(m.f1 * 100).toFixed(1)}%`,
