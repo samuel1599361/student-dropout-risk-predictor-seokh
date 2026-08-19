@@ -96,22 +96,23 @@ function TemplateEditor() {
 
   const sampleResult = useMemo(() => predict(SAMPLE), []);
 
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
-      try {
-        const doc = buildReport(
-          SAMPLE,
-          sampleResult,
-          user?.email ?? "School staff",
-          template,
-        );
-        setPreviewUrl(doc.output("datauristring"));
-      } catch {
-        setPreviewUrl(null);
-      }
-    }, 250);
-    return () => window.clearTimeout(timer);
-  }, [template, sampleResult, user?.email]);
+  const openPdfPreview = () => {
+    try {
+      const doc = buildReport(SAMPLE, sampleResult, user?.email ?? "School staff", template);
+      const url = URL.createObjectURL(doc.output("blob"));
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `SEOK-template-preview-${SAMPLE.student_id}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 30_000);
+      toast.success("Sample PDF generated with your current settings");
+    } catch {
+      toast.error("Could not build the sample PDF");
+    }
+  };
+
 
   const onLogo = (file: File) => {
     if (file.size > 1_000_000) {
