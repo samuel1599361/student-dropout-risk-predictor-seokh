@@ -5,6 +5,11 @@ import {
   FileSpreadsheet,
   GraduationCap,
   HelpCircle,
+  Layout,
+  Lock,
+  LogIn,
+  Settings,
+  Users,
   XCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -30,7 +35,50 @@ const HOW_IT_WORKS = [
   {
     icon: FileSpreadsheet,
     title: "Bulk CSV",
-    body: "Upload a whole cohort, filter results, and export or batch-download PDF reports.",
+    body: "Upload a whole database, filter results, and export or batch-download PDF reports.",
+  },
+];
+
+const ROUTE_GUIDE = [
+  {
+    icon: Layout,
+    title: "Home (/)",
+    body: "The landing page with an overview of SEOK, how it works, and the feature ranges.",
+  },
+  {
+    icon: LogIn,
+    title: "Auth (/auth)",
+    body: "Where staff sign up or sign in with email/password or Google. Choose the same method you used when you registered.",
+  },
+  {
+    icon: CheckCircle2,
+    title: "Predict (/predict)",
+    body: "Look up a single student by ID or enter the eight features manually, then get a risk verdict and downloadable PDF report.",
+  },
+  {
+    icon: FileSpreadsheet,
+    title: "Bulk CSV (/bulk)",
+    body: "Upload a CSV file with many students at once, screen them all, filter the results, and export PDFs or tables.",
+  },
+  {
+    icon: GraduationCap,
+    title: "Insights (/insights)",
+    body: "A dashboard showing the database summary, dropout statistics, model performance metrics, and key risk factors.",
+  },
+  {
+    icon: Users,
+    title: "Students (/students)",
+    body: "Search, add, or edit student records (Student ID, Age, and the eight predictive features) stored in the database.",
+  },
+  {
+    icon: Settings,
+    title: "Template (/template)",
+    body: "Customise the PDF reports: upload your school logo, set header/footer text, choose colours, and pick a 1-page or 2-page layout.",
+  },
+  {
+    icon: Lock,
+    title: "Reset password (/reset-password)",
+    body: "Request a password-reset email if you signed up with email and password and have forgotten your password.",
   },
 ];
 
@@ -87,6 +135,26 @@ export function HelpPanel({ full = false }: { full?: boolean }) {
                 </li>
               ))}
             </ol>
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-foreground">Navigation pages</h3>
+            <p className="mt-1.5 text-muted-foreground">
+              Each item in the top menu or route dropdown takes you to a specific part of the app.
+            </p>
+            <ul className="mt-3 space-y-3">
+              {ROUTE_GUIDE.map((route) => (
+                <li key={route.title} className="flex gap-3">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <route.icon className="size-4" />
+                  </span>
+                  <div>
+                    <span className="font-medium">{route.title}</span>
+                    <p className="text-muted-foreground">{route.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div>
