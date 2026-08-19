@@ -65,7 +65,8 @@ function InsightsPage() {
         <h1 className="text-3xl font-bold">Cohort insights</h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
           How the optimized Random Forest classifier performs, which factors carry the most
-          predictive weight, and what your team has been screening.
+          predictive weight, and what your team has been screening. Scores come from a
+          low-noise simulated cohort, so they are not a forecast of field accuracy.
         </p>
 
         <Suspense
