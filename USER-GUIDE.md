@@ -69,6 +69,8 @@ Values entered outside these ranges are automatically clamped to the nearest bou
 - Every at-risk flag should be reviewed by a qualified staff member before any action is taken.
 - Record the eight features consistently across all staff and systems.
 - Student records are personal data: restrict staff access, keep reports secure, and follow your local data-protection rules.
+- **Evaluation mode (known limitation):** any account that signs up can immediately read and manage all records in the demo database. This is intentional so assessors can sign up and test everything at once, and is acceptable only because the 1,000 records are simulated. A real deployment needs a staff-role table with role-scoped access rules and an approval step for new accounts.
+
 
 ---
 
