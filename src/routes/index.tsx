@@ -113,9 +113,10 @@ function Landing() {
               <span className="block text-ink-foreground/70">— SEOKH</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-ink-foreground/80">
-              An early warning system for school administrators. Enter a Student ID, and the
-              model returns an explained dropout risk verdict with prioritised interventions
-              you can download as a PDF.
+              This application is a student dropout risk early warning system designed for school
+              administrators and staff. Sign in, enter a Student ID, click Predict, and the model
+              returns an explained dropout risk verdict with prioritised interventions you can
+              download as a PDF. Click <strong>Help</strong> for detailed instructions on how this app works.
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Button size="lg" asChild>
