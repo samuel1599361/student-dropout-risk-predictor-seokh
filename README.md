@@ -1,5 +1,7 @@
 # Student Dropout Risk Predictor — SEOKH
 
+> GitHub repository: `student-dropout-risk-predictor-seokh`
+
 **SEOKH Early Warning System** is an AI-powered web application that helps school
 administrators identify students at risk of dropping out, understand *why* they
 are at risk, and act on concrete, prioritised interventions.
@@ -158,8 +160,8 @@ src/routes/                  file-based routes; _authenticated/ is the guarded s
 ## 6. Running locally
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
+git clone https://github.com/samuel1599361/student-dropout-risk-predictor-seokh.git
+cd student-dropout-risk-predictor-seokh
 npm i
 npm run dev
 ```
