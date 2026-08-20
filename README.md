@@ -204,6 +204,30 @@ provisioned automatically by Lovable Cloud.
 - Student records are personal data — restrict staff accounts accordingly and
   retain reports in line with local data-protection rules.
 
+### Known limitation: open staff access (evaluation mode)
+
+This is an academic capstone project built for assessor evaluation. To make
+evaluation frictionless, **any account that signs up is treated as school
+staff**: once signed in, a user can read and manage all records in the
+simulated `students` table. There is no role table, approval step, or
+school-scoped partitioning.
+
+This is a deliberate, documented trade-off, and it is safe here only because
+all 1,000 student records are **synthetic** — no real student data exists in
+the database. Before any operational deployment the following must be added:
+
+- a separate `user_roles` table with an `app_role` enum (never roles on
+  `profiles`), plus a `security definer` `has_role()` function;
+- RLS policies on `students` scoped to `has_role(auth.uid(), 'staff')` instead
+  of any authenticated user;
+- an administrator-controlled approval flow for new staff sign-ups (email
+  domain allow-list and/or manual role grant);
+- removal of email auto-confirmation so accounts must verify their address.
+
+Prediction history in `predictions` is already scoped to its owning user, and
+`profiles` rows are per-user.
+
+
 ---
 
 Built with [Lovable](https://lovable.dev).
