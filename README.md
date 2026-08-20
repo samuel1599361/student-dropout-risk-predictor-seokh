@@ -160,8 +160,8 @@ src/routes/                  file-based routes; _authenticated/ is the guarded s
 ## 6. Running locally
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
+git clone https://github.com/samuel1599361/student-dropout-risk-predictor-seokh.git
+cd student-dropout-risk-predictor-seokh
 npm i
 npm run dev
 ```
